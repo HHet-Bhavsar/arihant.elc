@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arihant Header</title>
+    <link rel="stylesheet" href="header.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo-link">
+                <span class="logo-text">Arihant</span>
+            </a>
+
+            <!-- Search Container -->
+            <div class="search-container">
+                <form class="search-form">
+                    <input type="text" class="search-input" placeholder="Search for products..." aria-label="Search">
+                    <button type="submit" class="search-button" aria-label="Search">
+                        <i class="fas fa-search search-icon"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="nav-desktop">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active" data-page="home">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="product.html" class="nav-link" data-page="products">
+                            <i class="fas fa-box"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="about">
+                            <i class="fas fa-info-circle"></i>
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="contact">
+                            <i class="fas fa-envelope"></i>
+                            Contact
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link cart-link" data-page="cart">
+                            <i class="fas fa-shopping-cart cart-icon"></i>
+                            Cart
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <nav>
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="index.html" class="mobile-nav-link active" data-page="home">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="product.html" class="mobile-nav-link" data-page="products">
+                            <i class="fas fa-box"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#" class="mobile-nav-link" data-page="about">
+                            <i class="fas fa-info-circle"></i>
+                            About
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#" class="mobile-nav-link" data-page="contact">
+                            <i class="fas fa-envelope"></i>
+                            Contact
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#" class="mobile-nav-link cart-link" data-page="cart">
+                            <i class="fas fa-shopping-cart mobile-cart-icon"></i>
+                            Cart
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+            <div class="floating-elements">
+                <div class="floating-icon icon-1">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <div class="floating-icon icon-2">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="floating-icon icon-3">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="floating-icon icon-4">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="floating-icon icon-5">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-container">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line-1">Premium Electronics</span>
+                        <span class="title-line-2">Smart Living</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Discover cutting-edge technology and innovative appliances that transform your home into a smart, connected haven.
+                    </p>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Free Delivery</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>2 Year Warranty</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-undo"></i>
+                            <span>Easy Returns</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">
+                            <span>Shop Now</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-play"></i>
+                            <span>Watch Demo</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="product-showcase">
+                        <div class="product-card main-product">
+                            <div class="product-image">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="product-info">
+                                <h3>Smart TV</h3>
+                                <p>4K Ultra HD</p>
+                                <span class="price">₹45,999</span>
+                            </div>
+                        </div>
+                        <div class="product-card side-product">
+                            <div class="product-image">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="product-info">
+                                <h3>Laptop</h3>
+                                <p>Intel i7</p>
+                                <span class="price">₹89,999</span>
+                            </div>
+                        </div>
+                        <div class="product-card side-product">
+                            <div class="product-image">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="product-info">
+                                <h3>Smartphone</h3>
+                                <p>128GB</p>
+                                <span class="price">₹29,999</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <h2>Welcome to Arihant</h2>
+            <p>Your premium destination for quality products and exceptional service.</p>
+        </div>
+    </main>
+
+    <!-- JavaScript for mobile menu functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+            // Toggle mobile menu
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                
+                // Animate hamburger lines
+                const lines = this.querySelectorAll('.hamburger-line');
+                lines.forEach((line, index) => {
+                    if (mobileMenu.classList.contains('active')) {
+                        if (index === 0) line.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        if (index === 1) line.style.opacity = '0';
+                        if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    } else {
+                        line.style.transform = 'none';
+                        line.style.opacity = '1';
+                    }
+                });
+            });
+
+            // Handle navigation link clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Only prevent default for links that don't have href or have href="#"
+                    if (this.getAttribute('href') === '#' || !this.getAttribute('href')) {
+                        e.preventDefault();
+                    }
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const lines = mobileMenuButton.querySelectorAll('.hamburger-line');
+                        lines.forEach(line => {
+                            line.style.transform = 'none';
+                            line.style.opacity = '1';
+                        });
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    const lines = mobileMenuButton.querySelectorAll('.hamburger-line');
+                    lines.forEach(line => {
+                        line.style.transform = 'none';
+                        line.style.opacity = '1';
+                    });
+                }
+            });
+
+            // Handle search form submission
+            const searchForm = document.querySelector('.search-form');
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const searchInput = this.querySelector('.search-input');
+                const query = searchInput.value.trim();
+                
+                if (query) {
+                    // Add your search functionality here
+                    console.log('Searching for:', query);
+                    alert(`Searching for: ${query}`);
+                    searchInput.value = '';
+                }
+            });
+
+            // Add cart items indicator (example)
+            const cartLinks = document.querySelectorAll('.cart-link');
+            cartLinks.forEach(link => {
+                // Simulate cart items (you can replace this with actual cart logic)
+                if (Math.random() > 0.5) {
+                    link.classList.add('has-items');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

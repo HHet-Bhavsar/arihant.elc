@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Arihant</title>
+    <link rel="stylesheet" href="header.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Product Categories Styles */
+        .categories-section {
+            padding: 100px 20px 80px;
+            background: var(--bg-primary);
+            min-height: 100vh;
+        }
+
+        .categories-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .categories-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .categories-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .categories-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .category-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .category-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(78, 204, 163, 0.2);
+        }
+
+        .category-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-primary), #3dd4a7);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(78, 204, 163, 0.4);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .category-card:hover .category-title {
+            color: var(--accent-primary);
+        }
+
+        .category-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .category-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-primary);
+            border-radius: 50px;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 204, 163, 0.3);
+        }
+
+        .category-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .category-btn:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Special category cards */
+        .category-card.featured {
+            border-color: var(--accent-primary);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(78, 204, 163, 0.05) 100%);
+        }
+
+        .category-card.featured::before {
+            opacity: 0.05;
+        }
+
+        .category-card.new {
+            position: relative;
+        }
+
+        .category-card.new::after {
+            content: 'NEW';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 3;
+        }
+
+        .category-card.trending {
+            position: relative;
+        }
+
+        .category-card.trending::after {
+            content: 'TRENDING';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #8b5cf6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .categories-section {
+                padding: 80px 20px 60px;
+            }
+            
+            .categories-title {
+                font-size: 2.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .category-card {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .categories-section {
+                padding: 60px 16px 40px;
+            }
+            
+            .categories-title {
+                font-size: 2rem;
+            }
+            
+            .categories-subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .category-card {
+                padding: 24px 20px;
+            }
+            
+            .category-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .category-title {
+                font-size: 1.25rem;
+            }
+            
+            .category-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* Animation for category cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.2s; }
+        .category-card:nth-child(3) { animation-delay: 0.3s; }
+        .category-card:nth-child(4) { animation-delay: 0.4s; }
+        .category-card:nth-child(5) { animation-delay: 0.5s; }
+        .category-card:nth-child(6) { animation-delay: 0.6s; }
+        .category-card:nth-child(7) { animation-delay: 0.7s; }
+        .category-card:nth-child(8) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo-link">
+                <span class="logo-text">Arihant</span>
+            </a>
+
+            <!-- Search Container -->
+            <div class="search-container">
+                <form class="search-form">
+                    <input type="text" class="search-input" placeholder="Search for products..." aria-label="Search">
+                    <button type="submit" class="search-button" aria-label="Search">
+                        <i class="fas fa-search search-icon"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="nav-desktop">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link" data-page="home">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="product.html" class="nav-link active" data-page="products">
+                            <i class="fas fa-box"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="about">
+                            <i class="fas fa-info-circle"></i>
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-page="contact">
+                            <i class="fas fa-envelope"></i>
+                            Contact
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link cart-link" data-page="cart">
+                            <i class="fas fa-shopping-cart cart-icon"></i>
+                            Cart
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <nav>
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="index.html" class="mobile-nav-link" data-page="home">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="product.html" class="mobile-nav-link active" data-page="products">
+                            <i class="fas fa-box"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#" class="mobile-nav-link" data-page="about">
+                            <i class="fas fa-info-circle"></i>
+                            About
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#" class="mobile-nav-link" data-page="contact">
+                            <i class="fas fa-envelope"></i>
+                            Contact
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#" class="mobile-nav-link cart-link" data-page="cart">
+                            <i class="fas fa-shopping-cart mobile-cart-icon"></i>
+                            Cart
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Categories Section -->
+    <section class="categories-section">
+        <div class="categories-container">
+            <!-- Categories Header -->
+            <div class="categories-header">
+                <h1 class="categories-title">Product Categories</h1>
+                <p class="categories-subtitle">Explore our wide range of premium electronics and smart appliances</p>
+            </div>
+
+            <!-- Categories Grid -->
+            <div class="categories-grid">
+                <!-- Smart TVs -->
+                <div class="category-card featured">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <h3 class="category-title">Smart TVs</h3>
+                        <p class="category-description">
+                            Experience stunning visuals with our collection of 4K Ultra HD Smart TVs featuring HDR, smart features, and premium display technology.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">150+</span>
+                                <span class="stat-label">Models</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">32"</span>
+                                <span class="stat-label">to 85"</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">4K</span>
+                                <span class="stat-label">Resolution</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore TVs</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Laptops -->
+                <div class="category-card">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3 class="category-title">Laptops</h3>
+                        <p class="category-description">
+                            Powerful laptops for work, gaming, and creativity. From ultrabooks to gaming rigs, find the perfect laptop for your needs.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">200+</span>
+                                <span class="stat-label">Models</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Intel</span>
+                                <span class="stat-label">& AMD</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">RTX</span>
+                                <span class="stat-label">Graphics</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore Laptops</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Smartphones -->
+                <div class="category-card trending">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="category-title">Smartphones</h3>
+                        <p class="category-description">
+                            Latest smartphones with cutting-edge technology, advanced cameras, and powerful processors for the ultimate mobile experience.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">100+</span>
+                                <span class="stat-label">Models</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">5G</span>
+                                <span class="stat-label">Ready</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">128GB</span>
+                                <span class="stat-label">Storage</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore Phones</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Audio -->
+                <div class="category-card">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-headphones"></i>
+                        </div>
+                        <h3 class="category-title">Audio</h3>
+                        <p class="category-description">
+                            Premium audio equipment including headphones, speakers, and sound systems for the ultimate listening experience.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">80+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Hi-Fi</span>
+                                <span class="stat-label">Quality</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Wireless</span>
+                                <span class="stat-label">Options</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore Audio</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cameras -->
+                <div class="category-card new">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3 class="category-title">Cameras</h3>
+                        <p class="category-description">
+                            Professional cameras and photography equipment for capturing life's precious moments with stunning clarity and detail.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">60+</span>
+                                <span class="stat-label">Models</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">4K</span>
+                                <span class="stat-label">Video</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">24MP</span>
+                                <span class="stat-label">Sensor</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore Cameras</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Home Appliances -->
+                <div class="category-card">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="category-title">Home Appliances</h3>
+                        <p class="category-description">
+                            Smart home appliances that make your life easier and more convenient with advanced technology and energy efficiency.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">120+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Smart</span>
+                                <span class="stat-label">Features</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Energy</span>
+                                <span class="stat-label">Efficient</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore Appliances</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Gaming -->
+                <div class="category-card">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3 class="category-title">Gaming</h3>
+                        <p class="category-description">
+                            Gaming consoles, accessories, and peripherals for the ultimate gaming experience with high-performance hardware.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">90+</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">4K</span>
+                                <span class="stat-label">Gaming</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">120fps</span>
+                                <span class="stat-label">Performance</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore Gaming</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Accessories -->
+                <div class="category-card">
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h3 class="category-title">Accessories</h3>
+                        <p class="category-description">
+                            Essential accessories and peripherals to enhance your devices and complete your tech setup with style and functionality.
+                        </p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">300+</span>
+                                <span class="stat-label">Items</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Premium</span>
+                                <span class="stat-label">Quality</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Universal</span>
+                                <span class="stat-label">Compatible</span>
+                            </div>
+                        </div>
+                        <a href="#" class="category-btn">
+                            <span>Explore Accessories</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for mobile menu functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+
+            // Toggle mobile menu
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                
+                // Animate hamburger lines
+                const lines = this.querySelectorAll('.hamburger-line');
+                lines.forEach((line, index) => {
+                    if (mobileMenu.classList.contains('active')) {
+                        if (index === 0) line.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        if (index === 1) line.style.opacity = '0';
+                        if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    } else {
+                        line.style.transform = 'none';
+                        line.style.opacity = '1';
+                    }
+                });
+            });
+
+            // Handle navigation link clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Only prevent default for links that don't have href or have href="#"
+                    if (this.getAttribute('href') === '#' || !this.getAttribute('href')) {
+                        e.preventDefault();
+                    }
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const lines = mobileMenuButton.querySelectorAll('.hamburger-line');
+                        lines.forEach(line => {
+                            line.style.transform = 'none';
+                            line.style.opacity = '1';
+                        });
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    const lines = mobileMenuButton.querySelectorAll('.hamburger-line');
+                    lines.forEach(line => {
+                        line.style.transform = 'none';
+                        line.style.opacity = '1';
+                    });
+                }
+            });
+
+            // Handle search form submission
+            const searchForm = document.querySelector('.search-form');
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const searchInput = this.querySelector('.search-input');
+                const query = searchInput.value.trim();
+                
+                if (query) {
+                    // Add your search functionality here
+                    console.log('Searching for:', query);
+                    alert(`Searching for: ${query}`);
+                    searchInput.value = '';
+                }
+            });
+
+            // Add cart items indicator (example)
+            const cartLinks = document.querySelectorAll('.cart-link');
+            cartLinks.forEach(link => {
+                // Simulate cart items (you can replace this with actual cart logic)
+                if (Math.random() > 0.5) {
+                    link.classList.add('has-items');
+                }
+            });
+
+            // Category card interactions
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const categoryTitle = this.querySelector('.category-title').textContent;
+                    console.log(`Clicked on category: ${categoryTitle}`);
+                    // Add your category navigation logic here
+                });
+            });
+        });
+    </script>
+</body>
+</html>
